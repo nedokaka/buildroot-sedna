@@ -4,7 +4,7 @@
 #
 ################################################################################
 
-SHADOW_VERSION = 4.14.3
+SHADOW_VERSION = 4.14.5
 SHADOW_SITE = https://github.com/shadow-maint/shadow/releases/download/$(SHADOW_VERSION)
 SHADOW_SOURCE = shadow-$(SHADOW_VERSION).tar.xz
 SHADOW_LICENSE = BSD-3-Clause
@@ -41,12 +41,6 @@ define SHADOW_ACCOUNT_TOOLS_SETUID_PERMISSIONS
 endef
 else
 SHADOW_CONF_OPTS += --disable-account-tools-setuid
-endif
-
-ifeq ($(BR2_PACKAGE_SHADOW_UTMPX),y)
-SHADOW_CONF_OPTS += --enable-utmpx
-else
-SHADOW_CONF_OPTS += --disable-utmpx
 endif
 
 ifeq ($(BR2_PACKAGE_SHADOW_SUBORDINATE_IDS),y)
