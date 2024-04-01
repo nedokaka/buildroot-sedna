@@ -2,9 +2,10 @@ name: Makefile CI
 
 on:
   push:
-    branches: [ "downstream-5.9.0" ]
+    branches: [ "upstream-5.15.x" ]
   pull_request:
-    branches: [ "downstream-5.9.0" ]
+    branches: [ "upstream-5.15.x" ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -14,11 +15,17 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Install dependencies
+    - name: Compile
       run: make
-
-    - name: Run check
-      run: make check
-
-    - name: Run distcheck
-      run: make distcheck
+    
+    - name: Get Time
+      id: time
+      uses: nanzm/get-time-action@v1.1
+      with:
+          format: 'YYYY-MM-DD-HH-mm-ss'
+        
+    - name: Upload
+      uses: actions/upload-artifact@v3
+      with:
+        name: images_${{ steps.time.outputs.time }}"
+        path: output/images/
