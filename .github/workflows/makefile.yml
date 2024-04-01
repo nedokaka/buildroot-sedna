@@ -27,5 +27,5 @@ jobs:
     - name: Upload
       uses: actions/upload-artifact@v3
       with:
-        name: images_${{ steps.time.outputs.time }}"
+        name: "images_${{ steps.time.outputs.time }}"
         path: output/images/
